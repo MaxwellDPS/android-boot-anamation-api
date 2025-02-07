@@ -1,0 +1,7 @@
+services:
+  bootanimation:
+    image: chaoscorp/andro-boot-anamation:latest
+    build: .
+    container_name: bootanimation
+    ports:
+      - "5000:5000"

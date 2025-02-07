@@ -1,0 +1,39 @@
+name: Docker Build & Push
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      # 1) Check out code
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # 2) Set up QEMU (for multi-arch, if you want it)
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      # 3) Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # 4) Log in to Docker Hub
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      # 5) Build and push the image
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/bootanimation:latest
+          # optional: platforms: linux/amd64,linux/arm64
