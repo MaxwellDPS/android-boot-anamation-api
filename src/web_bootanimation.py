@@ -89,56 +89,75 @@ def create_bootanimation_zip(
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Boot Animation Creator</title>
-    <style>
-        body { font-family: sans-serif; max-width: 600px; margin: 30px auto; }
-        label { display: inline-block; width: 120px; }
-        input[type="number"] { width: 80px; }
-    </style>
+  <meta charset="UTF-8">
+  <title>Boot Animation Creator</title>
+  <!-- Bootstrap 5 CSS (via CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Android Boot Animation Creator</h1>
+  <div class="container mt-5">
+    <h1 class="mb-4">Android Boot Animation Creator</h1>
     <form method="POST" action="{{ url_for('convert_form') }}" enctype="multipart/form-data">
-        <div>
-            <label>Video (MP4):</label>
-            <input type="file" name="video" accept=".mp4" required />
+      
+      <!-- Video File -->
+      <div class="mb-3">
+        <label class="form-label">Video (MP4):</label>
+        <input type="file" class="form-control" name="video" accept=".mp4" required />
+      </div>
+      
+      <!-- Width / Height Row -->
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Width:</label>
+          <input type="number" class="form-control" name="width" value="0" required />
+          <small class="text-muted">Set 0 to auto-detect</small>
         </div>
-        <div>
-            <label>Width:</label>
-            <input type="number" name="width" value="0" required />
-            <small>(Set 0 to auto-detect)</small>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Height:</label>
+          <input type="number" class="form-control" name="height" value="0" required />
+          <small class="text-muted">Set 0 to auto-detect</small>
         </div>
-        <div>
-            <label>Height:</label>
-            <input type="number" name="height" value="0" required />
-            <small>(Set 0 to auto-detect)</small>
-        </div>
-        <div>
-            <label>FPS:</label>
-            <input type="number" name="fps" value="30" required />
-        </div>
-        <div>
-            <label>Loop Count:</label>
-            <input type="number" name="loop_count" value="0" required />
-            <small>(0 = infinite)</small>
-        </div>
-        <div>
-            <label>Pause:</label>
-            <input type="number" name="pause" value="0" required />
-            <small>(Frames to pause after part)</small>
-        </div>
-        <div>
-            <label>Part Name:</label>
-            <input type="text" name="part_name" value="part0" required />
-        </div>
-        <br />
-        <button type="submit">Create Boot Animation</button>
+      </div>
+      
+      <!-- FPS -->
+      <div class="mb-3">
+        <label class="form-label">FPS:</label>
+        <input type="number" class="form-control" name="fps" value="30" required />
+      </div>
+      
+      <!-- Loop Count -->
+      <div class="mb-3">
+        <label class="form-label">Loop Count:</label>
+        <input type="number" class="form-control" name="loop_count" value="0" required />
+        <small class="text-muted">(0 = infinite)</small>
+      </div>
+      
+      <!-- Pause -->
+      <div class="mb-3">
+        <label class="form-label">Pause:</label>
+        <input type="number" class="form-control" name="pause" value="0" required />
+        <small class="text-muted">(Frames to pause after part)</small>
+      </div>
+      
+      <!-- Part Name -->
+      <div class="mb-3">
+        <label class="form-label">Part Name:</label>
+        <input type="text" class="form-control" name="part_name" value="part0" required />
+      </div>
+      
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">Create Boot Animation</button>
     </form>
+  </div>
+
+  <!-- Bootstrap 5 JavaScript (optional for basic forms, but useful for other features) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 """
+
 
 @app.route("/", methods=["GET"])
 def home():
