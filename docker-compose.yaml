@@ -1,6 +1,6 @@
 services:
   bootanimation:
-    image: chaoscorp/andro-boot-anamation:latest
+    image: chaoscorp/android-boot-anamation-api:latest
     build: .
     container_name: bootanimation
     ports:
