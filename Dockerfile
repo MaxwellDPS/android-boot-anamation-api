@@ -7,11 +7,11 @@ RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 # Copy requirements and install
-COPY requirements.txt .
+COPY ./src/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy your Flask app
-COPY web_bootanimation.py .
+COPY ./src/web_bootanimation.py .
 
 # Expose port 5000
 EXPOSE 5000
