@@ -36,4 +36,4 @@ jobs:
           context: .
           push: true
           tags: chaoscorp/android-boot-anamation-api:latest
-          optional: platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64
